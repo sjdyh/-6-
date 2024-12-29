@@ -61,6 +61,7 @@ conv_2 = conv2d(max_pool_1,w2) + b2
 relu_2 = tf.nn.relu(conv_2,name='relu_2')
 max_pool_2 = max_pool2x2(relu_2,'max_pool_2')
 
+# 卷积核3*3*32  64个  第三层卷积
 w3 = weight_init([3,3,32,64])
 b3 = bias_init([64])
 conv_3 = conv2d(max_pool_2,w3)+b3
@@ -80,6 +81,7 @@ f_r1 = tf.matmul(f_input,f_w1) + f_b1
 f_relu_r1 = tf.nn.relu(f_r1)
 f_dropout_r1 = tf.nn.dropout(f_relu_r1,drop_prob)
 
+#全连接第二层 
 f_w2 = fch_init(512,128)
 f_b2 = bias_init([128])
 f_r2 = tf.matmul(f_dropout_r1,f_w2) + f_b2
@@ -87,7 +89,7 @@ f_relu_r2 = tf.nn.relu(f_r2)
 f_dropout_r2 = tf.nn.dropout(f_relu_r2,drop_prob)
 
 
-#全连接第二层 512,2
+#全连接第三层
 f_w3 = fch_init(128,2)
 f_b3 = bias_init([2])
 f_r3 = tf.matmul(f_dropout_r2,f_w3) + f_b3
